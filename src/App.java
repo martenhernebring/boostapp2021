@@ -7,28 +7,31 @@ import java.time.temporal.ChronoUnit;
 public class App {
     public static void main(String[] args) throws IOException {
         Instant instant = Instant.now();
-        String upload = instant.toString().substring(0,23)+"Z";
+        //String upload = instant.toString().substring(0,23)+"Z";
         Instant yesterday = instant.minus(1, ChronoUnit.DAYS);
         final int STEPS = 2000;
+        String endtime = instant.toString().substring(0,23);
         try(BufferedWriter bw = new BufferedWriter(new FileWriter("multiple.txt"))){
             bw.write("[");
             bw.write("\n  {\n" +
-                    "    \"endTime\": \""+instant.toString().substring(0,23)+"Z\",\n" +
+                    "    \"endTime\": \""+endtime+"Z\",\n" +
                     "    \"startTime\": \""+yesterday.toString().substring(0,23)+"Z\",\n" +
                     "    \"stepCount\": "+STEPS+"\n" +
-                    "    \"uploadedTime\": \""+upload+"\"\n" +
+                    "    \"uploadedTime\": \""+endtime+"Z\"\n" +
                     "  }");
             instant = yesterday;
             yesterday = instant.minus(1, ChronoUnit.DAYS);
+            endtime = instant.toString().substring(0,23);
             for(int i = 1; i<1000; i++){
                 bw.write(",\n  {\n" +
-                        "    \"endTime\": \""+instant.toString().substring(0,23)+"Z\",\n" +
+                        "    \"endTime\": \""+endtime+"Z\",\n" +
                         "    \"startTime\": \""+yesterday.toString().substring(0,23)+"Z\",\n" +
                         "    \"stepCount\": "+(STEPS-i)+",\n" +
-                        "    \"uploadedTime\": \""+upload+"\"\n" +
+                        "    \"uploadedTime\": \""+endtime+"Z\"\n" +
                         "  }");
                 instant = yesterday;
                 yesterday = instant.minus(1, ChronoUnit.DAYS);
+                endtime = instant.toString().substring(0,23);
             }
             bw.write("\n]");
         }

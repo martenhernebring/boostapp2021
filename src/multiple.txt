@@ -2,7 +2,7 @@
   {
     "endTime": "2021-08-31T11:04:20.944Z",
     "startTime": "2021-08-30T11:04:20.944Z",
-    "stepCount": 2000
+    "stepCount": 2000,
     "uploadedTime": "2021-08-31T11:04:20.944Z"
   },
   {

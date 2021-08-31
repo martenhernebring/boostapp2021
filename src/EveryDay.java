@@ -16,7 +16,7 @@ public class EveryDay {
             bw.write("\n  {\n" +
                     "    \"endTime\": \""+endtime+"Z\",\n" +
                     "    \"startTime\": \""+yesterday.toString().substring(0,23)+"Z\",\n" +
-                    "    \"stepCount\": "+STEPS+"\n" +
+                    "    \"stepCount\": "+STEPS+",\n" +
                     "    \"uploadedTime\": \""+endtime+"Z\"\n" +
                     "  }");
             for(int i = 1; i<1000; i++){

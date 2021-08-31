@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-public class EveryMinute {
+public class EverySecond {
     public static void main(String[] args) throws IOException {
         Instant instant = Instant.now().minus(1000, ChronoUnit.SECONDS);
         Instant secondAfter = instant.plus(1, ChronoUnit.SECONDS);
@@ -15,7 +15,7 @@ public class EveryMinute {
             bw.write("\n  {\n" +
                     "    \"endTime\": \""+ endTime +"Z\",\n" +
                     "    \"startTime\": \""+secondAfter.toString().substring(0,23)+"Z\",\n" +
-                    "    \"stepCount\": "+STEPS+"\n" +
+                    "    \"stepCount\": "+STEPS+",\n" +
                     "    \"uploadedTime\": \""+ endTime +"Z\"\n" +
                     "  }");
             for(int i = 1; i<1000; i++){

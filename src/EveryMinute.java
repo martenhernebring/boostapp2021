@@ -6,25 +6,25 @@ import java.time.temporal.ChronoUnit;
 
 public class EveryMinute {
     public static void main(String[] args) throws IOException {
-        Instant instant = Instant.now();
-        Instant secondBefore = instant.minus(1, ChronoUnit.SECONDS);
+        Instant instant = Instant.now().minus(1000, ChronoUnit.SECONDS);
+        Instant secondAfter = instant.plus(1, ChronoUnit.SECONDS);
         final int STEPS = 2;
         String endTime = instant.toString().substring(0,23);
         try(BufferedWriter bw = new BufferedWriter(new FileWriter("seconds.txt"))){
             bw.write("[");
             bw.write("\n  {\n" +
                     "    \"endTime\": \""+ endTime +"Z\",\n" +
-                    "    \"startTime\": \""+secondBefore.toString().substring(0,23)+"Z\",\n" +
+                    "    \"startTime\": \""+secondAfter.toString().substring(0,23)+"Z\",\n" +
                     "    \"stepCount\": "+STEPS+"\n" +
                     "    \"uploadedTime\": \""+ endTime +"Z\"\n" +
                     "  }");
             for(int i = 1; i<1000; i++){
-                instant = secondBefore;
-                secondBefore = instant.minus(1, ChronoUnit.SECONDS);
+                instant = secondAfter;
+                secondAfter = instant.plus(1, ChronoUnit.SECONDS);
                 endTime = instant.toString().substring(0,23);
                 bw.write(",\n  {\n" +
                         "    \"endTime\": \""+ endTime +"Z\",\n" +
-                        "    \"startTime\": \""+secondBefore.toString().substring(0,23)+"Z\",\n" +
+                        "    \"startTime\": \""+secondAfter.toString().substring(0,23)+"Z\",\n" +
                         "    \"stepCount\": "+STEPS+",\n" +
                         "    \"uploadedTime\": \""+ endTime +"Z\"\n" +
                         "  }");

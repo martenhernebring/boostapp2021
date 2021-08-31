@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-public class App {
+public class EveryDay {
     public static void main(String[] args) throws IOException {
         Instant instant = Instant.now();
         //String upload = instant.toString().substring(0,23)+"Z";
@@ -19,19 +19,16 @@ public class App {
                     "    \"stepCount\": "+STEPS+"\n" +
                     "    \"uploadedTime\": \""+endtime+"Z\"\n" +
                     "  }");
-            instant = yesterday;
-            yesterday = instant.minus(1, ChronoUnit.DAYS);
-            endtime = instant.toString().substring(0,23);
             for(int i = 1; i<1000; i++){
+                instant = yesterday;
+                yesterday = instant.minus(1, ChronoUnit.DAYS);
+                endtime = instant.toString().substring(0,23);
                 bw.write(",\n  {\n" +
                         "    \"endTime\": \""+endtime+"Z\",\n" +
                         "    \"startTime\": \""+yesterday.toString().substring(0,23)+"Z\",\n" +
                         "    \"stepCount\": "+(STEPS-i)+",\n" +
                         "    \"uploadedTime\": \""+endtime+"Z\"\n" +
                         "  }");
-                instant = yesterday;
-                yesterday = instant.minus(1, ChronoUnit.DAYS);
-                endtime = instant.toString().substring(0,23);
             }
             bw.write("\n]");
         }
